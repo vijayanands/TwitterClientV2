@@ -45,6 +45,8 @@ class MenuViewController: UIViewController {
 		viewControllers.append(tweetsViewController)
 		viewControllers.append(mentionsViewController)
 		viewControllers.append(accountsViewController)
+		
+		hamburgerViewController.contentViewController = tweetsViewController
     }
 
     override func didReceiveMemoryWarning() {

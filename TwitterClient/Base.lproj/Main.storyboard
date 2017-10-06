@@ -46,14 +46,14 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <segue destination="QcB-tw-hJ1" kind="presentation" identifier="loginSegue" id="M6M-vF-TX1"/>
+                        <segue destination="Mvr-i1-zA3" kind="presentation" identifier="loginSegue" id="kqa-aR-cmz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="118" y="188"/>
         </scene>
-        <!--Home-->
+        <!--Hamburger View Controller-->
         <scene sceneID="ndw-vE-r1t">
             <objects>
                 <viewController storyboardIdentifier="HamburgerViewController" id="Mvr-i1-zA3" customClass="HamburgerViewController" customModule="TwitterClient" customModuleProvider="target" sceneMemberID="viewController">
@@ -87,13 +87,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4uO-jD-7up"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="W4X-3L-qbl">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="logout" id="eJq-Gb-Yav">
-                            <connections>
-                                <action selector="onLogout:" destination="Mvr-i1-zA3" id="Zla-C7-dZu"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="W4X-3L-qbl"/>
                     <connections>
                         <outlet property="contentView" destination="MjY-LS-VKF" id="lpw-TB-FKp"/>
                         <outlet property="leftMarginConstraint" destination="WcN-kb-ZiY" id="bgV-Q1-WIx"/>
@@ -107,7 +101,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1844" y="186.65667166416793"/>
+            <point key="canvasLocation" x="1174" y="188"/>
         </scene>
         <!--Tweets View Controller-->
         <scene sceneID="2K0-nx-CsE">
@@ -737,24 +731,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hq9-Ef-WH8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1100" y="963"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="W6L-5q-koV">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QcB-tw-hJ1" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WWK-P3-S7P">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Mvr-i1-zA3" kind="relationship" relationship="rootViewController" id="6JQ-fc-Lg2"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yhC-Yx-TTb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1083.2" y="187.1064467766117"/>
         </scene>
     </scenes>
     <resources>

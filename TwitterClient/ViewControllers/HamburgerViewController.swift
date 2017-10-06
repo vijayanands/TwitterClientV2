@@ -16,20 +16,37 @@ class HamburgerViewController: UIViewController {
 	
 	var originalLeftMargin: CGFloat!
 	var menuViewController: UIViewController! {
-		didSet {
+		didSet(oldMenuViewController) {
 			view.layoutIfNeeded()
+
+			if oldMenuViewController != nil {
+				oldMenuViewController.willMove(toParentViewController: nil)
+				oldMenuViewController.view.removeFromSuperview()
+				oldMenuViewController.didMove(toParentViewController: nil)
+			}
 			
+			menuViewController.willMove(toParentViewController: self)
 			menuView.addSubview(menuViewController.view)
+			menuViewController.didMove(toParentViewController: self)
 		}
 	}
 	var contentViewController: UIViewController! {
-		didSet {
+		didSet(oldContentViewContainer) {
 			view.layoutIfNeeded()
 			
+			if oldContentViewContainer != nil {
+				oldContentViewContainer.willMove(toParentViewController: nil)
+				oldContentViewContainer.view.removeFromSuperview()
+				oldContentViewContainer.didMove(toParentViewController: nil)
+			}
+			
+			contentViewController.willMove(toParentViewController: self)
+			contentView.addSubview(contentViewController.view)
+			contentViewController.didMove(toParentViewController: self)
+
 			UIView.animate(withDuration: 0.3) {
 				self.leftMarginConstraint.constant = 0
 			}
-			contentView.addSubview(contentViewController.view)
 		}
 	}
 	
@@ -69,14 +86,14 @@ class HamburgerViewController: UIViewController {
 		}
 	}
 	
+	/*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-		let destinationViewController = segue.destination as! HamburgerViewController
-		destinationViewController.menuViewController = menuViewController
     }
+	*/	
 
 }
