@@ -36,10 +36,10 @@ class MenuViewController: UIViewController {
 		
         // Do any additional setup after loading the view.
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		tweetsViewController = storyboard.instantiateViewController(withIdentifier: "TweetsViewController")
-		mentionsViewController = storyboard.instantiateViewController(withIdentifier: "MentionsViewController")
-		profilesViewController = storyboard.instantiateViewController(withIdentifier: "ProfilesViewController")
-		accountsViewController = storyboard.instantiateViewController(withIdentifier: "AccountsViewController")
+		tweetsViewController = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationController")
+		mentionsViewController = storyboard.instantiateViewController(withIdentifier: "MentionsNavigationController")
+		profilesViewController = storyboard.instantiateViewController(withIdentifier: "ProfilesNavigationController")
+		accountsViewController = storyboard.instantiateViewController(withIdentifier: "AccountsNavigationController")
 		
 		viewControllers.append(profilesViewController)
 		viewControllers.append(tweetsViewController)
