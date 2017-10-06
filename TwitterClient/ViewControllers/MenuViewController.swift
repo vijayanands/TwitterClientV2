@@ -33,6 +33,7 @@ class MenuViewController: UIViewController {
 		
 		menuTableView.delegate = self
 		menuTableView.dataSource = self
+		menuTableView.tableFooterView = UIView()
 		
         // Do any additional setup after loading the view.
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -67,7 +68,7 @@ class MenuViewController: UIViewController {
 
 extension MenuViewController : UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 4
+		return self.viewControllers.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -83,6 +84,12 @@ extension MenuViewController : UITableViewDelegate, UITableViewDataSource {
 		hamburgerViewController.contentViewController = viewControllers[indexPath.row]
 	}
 	
-	
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		let MinHeight: CGFloat = 100.0
+		let tHeight = tableView.bounds.height
+		let temp = tHeight/CGFloat(self.viewControllers.count)
+		
+		return temp > MinHeight ? temp : MinHeight
+	}
 }
 
