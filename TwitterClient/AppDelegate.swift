@@ -18,26 +18,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		let hamburgerViewController = storyboard.instantiateViewController(withIdentifier: "HamburgerViewController") as! HamburgerViewController
+		let menuViewController = storyboard.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
+		
+		hamburgerViewController.menuViewController = menuViewController
+		menuViewController.hamburgerViewController = hamburgerViewController
+		
 
 		if (User.currentUser != nil) {
 			print("There is a Current User")
 			User.currentUser?.printUser()
-			
-			let storyboard = UIStoryboard(name: "Main", bundle: nil)
-			let viewController = storyboard.instantiateViewController(withIdentifier: "HamburgerViewController")
-			window?.rootViewController = viewController
+			window?.rootViewController = hamburgerViewController
 		}
 		
 		NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: User.userDidLogoutNotification), object: nil, queue: OperationQueue.main) { (notification: Notification) in
 			let viewController = storyboard.instantiateInitialViewController()
 			self.window?.rootViewController = viewController
 		}
-		
-		let hamburgerViewController = storyboard.instantiateViewController(withIdentifier: "HamburgerViewController") as! HamburgerViewController
-		let menuViewController = storyboard.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
-
-		hamburgerViewController.menuViewController = menuViewController
-		menuViewController.hamburgerViewController = hamburgerViewController
 		
 		return true
 	}

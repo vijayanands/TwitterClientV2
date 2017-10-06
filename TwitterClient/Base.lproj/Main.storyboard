@@ -62,11 +62,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ysa-SO-nj0" userLabel="Menu View">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MjY-LS-VKF" userLabel="Content View">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -80,10 +80,10 @@
                             <constraint firstItem="MjY-LS-VKF" firstAttribute="leading" secondItem="4uO-jD-7up" secondAttribute="leading" id="WcN-kb-ZiY"/>
                             <constraint firstItem="ysa-SO-nj0" firstAttribute="trailing" secondItem="4uO-jD-7up" secondAttribute="trailing" id="elo-cl-nh6"/>
                             <constraint firstItem="ysa-SO-nj0" firstAttribute="leading" secondItem="4uO-jD-7up" secondAttribute="leading" id="nrd-eB-Dq7"/>
-                            <constraint firstItem="ysa-SO-nj0" firstAttribute="top" secondItem="osY-zo-JIR" secondAttribute="top" id="pK9-lJ-d2W"/>
+                            <constraint firstItem="ysa-SO-nj0" firstAttribute="top" secondItem="osY-zo-JIR" secondAttribute="top" constant="64" id="pK9-lJ-d2W"/>
                             <constraint firstItem="MjY-LS-VKF" firstAttribute="width" secondItem="osY-zo-JIR" secondAttribute="width" id="q3r-ik-2cE"/>
                             <constraint firstItem="MjY-LS-VKF" firstAttribute="bottom" secondItem="4uO-jD-7up" secondAttribute="bottom" id="t5D-GL-xYc"/>
-                            <constraint firstItem="MjY-LS-VKF" firstAttribute="top" secondItem="osY-zo-JIR" secondAttribute="top" id="zYa-fX-v4I"/>
+                            <constraint firstItem="MjY-LS-VKF" firstAttribute="top" secondItem="osY-zo-JIR" secondAttribute="top" constant="64" id="zYa-fX-v4I"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4uO-jD-7up"/>
                     </view>
@@ -107,7 +107,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1844" y="187"/>
+            <point key="canvasLocation" x="1844" y="186.65667166416793"/>
         </scene>
         <!--Tweets View Controller-->
         <scene sceneID="2K0-nx-CsE">
