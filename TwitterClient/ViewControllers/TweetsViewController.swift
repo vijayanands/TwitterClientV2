@@ -9,12 +9,11 @@
 import UIKit
 
 class TweetsViewController: UIViewController {
-	
 	@IBOutlet weak var tweetsTable: UITableView!
+
 	var tweets: [Tweet]!
 	var isMoreDataLoading = false
 
-	@IBOutlet weak var menuViewLeadingConstraint: NSLayoutConstraint!
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +21,6 @@ class TweetsViewController: UIViewController {
 		tweetsTable.dataSource = self
 		tweetsTable.estimatedRowHeight = 130
 		tweetsTable.rowHeight = UITableViewAutomaticDimension
-		menuViewLeadingConstraint.constant = -140
 		
 		// Initialize a UIRefreshControl
 		let refreshControl = UIRefreshControl()
@@ -30,7 +28,9 @@ class TweetsViewController: UIViewController {
 		// add refresh control to table view
 		tweetsTable.insertSubview(refreshControl, at: 0)
 		
-		self.navigationController?.navigationBar.barTintColor = UIColor(red: 0, green: 0.7569, blue: 0.8588, alpha: 1.0)
+//		self.navigationController?.navigationBar.barTintColor = UIColor(red: 72, green: 191, blue: 255, alpha: 1.0)
+//		[UIColor colorWithRed:0.28 green:0.75 blue:1.00 alpha:1.0];
+		self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.28, green: 0.75, blue: 1.0, alpha: 1.0)
 		
         // Do any additional setup after loading the view.
 		loadTweets()
@@ -45,22 +45,6 @@ class TweetsViewController: UIViewController {
 		TwitterClient.sharedInstance?.logout()
 	}
 	
-	@IBAction func onPan(_ sender: UIPanGestureRecognizer) {
-		let velocity = sender.velocity(in: view)
-		
-		if sender.state == UIGestureRecognizerState.began {
-		} else if sender.state == UIGestureRecognizerState.changed {
-			UIView.animate(withDuration: 0.3, animations: {
-				if (velocity.x > 0) {
-					self.menuViewLeadingConstraint.constant = 0
-				} else {
-					self.menuViewLeadingConstraint.constant = -140
-				}
-			})
-			self.view.layoutIfNeeded()
-		} else if sender.state == UIGestureRecognizerState.ended {
-		}
-	}
 	// Makes a network request to get updated data
 	// Updates the tableView with the new data
 	// Hides the RefreshControl

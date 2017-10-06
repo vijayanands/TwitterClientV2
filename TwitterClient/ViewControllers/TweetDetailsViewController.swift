@@ -30,7 +30,7 @@ class TweetDetailsViewController: UIViewController {
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
-		self.navigationController?.navigationBar.barTintColor = UIColor(red: 0, green: 0.7569, blue: 0.8588, alpha: 1.0)
+		self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.28, green: 0.75, blue: 1.0, alpha: 1.0)
 
         // Do any additional setup after loading the view.
 		setTweetDetail()

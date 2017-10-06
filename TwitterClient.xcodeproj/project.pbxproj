@@ -20,6 +20,12 @@
 		AF6A69D11F7B66F30020AF40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF6A69D01F7B66F30020AF40 /* Assets.xcassets */; };
 		AF6A69D41F7B66F30020AF40 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF6A69D21F7B66F30020AF40 /* LaunchScreen.storyboard */; };
 		AF7973E41F7FFB4100B46F1B /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7973E31F7FFB4100B46F1B /* Utilities.swift */; };
+		AF8A3DC71F875AB400C3487C /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8A3DC61F875AB400C3487C /* MenuCell.swift */; };
+		AFC93D111F867F8400EDC526 /* MentionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC93D101F867F8400EDC526 /* MentionsViewController.swift */; };
+		AFC93D131F867FAE00EDC526 /* AccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC93D121F867FAE00EDC526 /* AccountsViewController.swift */; };
+		AFC93D151F867FB100EDC526 /* ProfilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC93D141F867FB100EDC526 /* ProfilesViewController.swift */; };
+		AFC93D171F868A7E00EDC526 /* HamburgerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC93D161F868A7E00EDC526 /* HamburgerViewController.swift */; };
+		AFC93D1B1F86FE2C00EDC526 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC93D1A1F86FE2C00EDC526 /* MenuViewController.swift */; };
 		AFE652CB1F80717F00121AAF /* NewTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE652CA1F80717F00121AAF /* NewTweetViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +47,12 @@
 		AF6A69D31F7B66F30020AF40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF6A69D51F7B66F30020AF40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF7973E31F7FFB4100B46F1B /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		AF8A3DC61F875AB400C3487C /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		AFC93D101F867F8400EDC526 /* MentionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionsViewController.swift; sourceTree = "<group>"; };
+		AFC93D121F867FAE00EDC526 /* AccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountsViewController.swift; path = /Users/sujavijay/workspace/codepath/TwitterClientV2/TwitterClient/ViewControllers/AccountsViewController.swift; sourceTree = "<absolute>"; };
+		AFC93D141F867FB100EDC526 /* ProfilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfilesViewController.swift; path = /Users/sujavijay/workspace/codepath/TwitterClientV2/TwitterClient/ViewControllers/ProfilesViewController.swift; sourceTree = "<absolute>"; };
+		AFC93D161F868A7E00EDC526 /* HamburgerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HamburgerViewController.swift; sourceTree = "<group>"; };
+		AFC93D1A1F86FE2C00EDC526 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		AFE652CA1F80717F00121AAF /* NewTweetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTweetViewController.swift; sourceTree = "<group>"; };
 		AFE652CC1F81658100121AAF /* TwitterClient.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TwitterClient.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,7 +89,12 @@
 		AF04914C1F7CBD3A00E3AF77 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				AFC93D161F868A7E00EDC526 /* HamburgerViewController.swift */,
 				AF0B684D1F80362B00622964 /* TweetDetailsViewController.swift */,
+				AFC93D1A1F86FE2C00EDC526 /* MenuViewController.swift */,
+				AFC93D121F867FAE00EDC526 /* AccountsViewController.swift */,
+				AFC93D141F867FB100EDC526 /* ProfilesViewController.swift */,
+				AFC93D101F867F8400EDC526 /* MentionsViewController.swift */,
 				AF0491551F7CC6AA00E3AF77 /* LoginViewController.swift */,
 				AF56BDB61F7F595300AC58B1 /* TweetsViewController.swift */,
 				AFE652CA1F80717F00121AAF /* NewTweetViewController.swift */,
@@ -107,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				AF56BDB91F7F6D2F00AC58B1 /* TweetCell.swift */,
+				AF8A3DC61F875AB400C3487C /* MenuCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -285,15 +303,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF0491561F7CC6AA00E3AF77 /* LoginViewController.swift in Sources */,
+				AFC93D1B1F86FE2C00EDC526 /* MenuViewController.swift in Sources */,
 				AF56BDBA1F7F6D2F00AC58B1 /* TweetCell.swift in Sources */,
 				AF0491541F7CC18300E3AF77 /* TwitterClient.swift in Sources */,
 				AF56BDB51F7EC4D400AC58B1 /* Tweet.swift in Sources */,
+				AFC93D151F867FB100EDC526 /* ProfilesViewController.swift in Sources */,
 				AF0B684E1F80362B00622964 /* TweetDetailsViewController.swift in Sources */,
+				AFC93D171F868A7E00EDC526 /* HamburgerViewController.swift in Sources */,
 				AF56BDB71F7F595300AC58B1 /* TweetsViewController.swift in Sources */,
 				AF56BDB31F7EC4BF00AC58B1 /* User.swift in Sources */,
 				AF7973E41F7FFB4100B46F1B /* Utilities.swift in Sources */,
 				AF6A69CA1F7B66F30020AF40 /* AppDelegate.swift in Sources */,
 				AFE652CB1F80717F00121AAF /* NewTweetViewController.swift in Sources */,
+				AFC93D131F867FAE00EDC526 /* AccountsViewController.swift in Sources */,
+				AF8A3DC71F875AB400C3487C /* MenuCell.swift in Sources */,
+				AFC93D111F867F8400EDC526 /* MentionsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
