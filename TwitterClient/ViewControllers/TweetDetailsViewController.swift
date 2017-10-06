@@ -23,6 +23,9 @@ class TweetDetailsViewController: UIViewController {
 	@IBOutlet weak var nameLabel: UILabel!
 	@IBOutlet weak var profileImage: UIImageView!
 	@IBOutlet weak var buttonBackgroundView: UIView!
+	@IBOutlet weak var replyButton: UIButton!
+	@IBOutlet weak var retweetButton: UIButton!
+	@IBOutlet weak var favoriteButton: UIButton!
 	
 	weak var delegate: TweetDetailsViewControllerDelegate?
 	
@@ -36,19 +39,12 @@ class TweetDetailsViewController: UIViewController {
 		setTweetDetail()
 		
 		// setup buttons
-		let replyButton = createButtonWithImage(imageName: "replybutton.png", x: 60, y: 5, width: 40, height: 40, borderWidth: 1, cornerRadius: 6, backgroundColor: UIColor(red: 0, green: 0.7569, blue: 0.8588, alpha: 1.0))
 		replyButton.addTarget(self, action: #selector(replyButtonTouched), for: UIControlEvents.touchUpInside)
-		self.buttonBackgroundView.addSubview(replyButton)
-
-		let retweetButton = createButtonWithImage(imageName: "retweetbutton.png", x: 160, y: 5, width: 40, height: 40, borderWidth: 1, cornerRadius: 6, backgroundColor: UIColor(red: 0, green: 0.7569, blue: 0.8588, alpha: 1.0))
 		retweetButton.addTarget(self, action: #selector(retweetButtonTouched), for: UIControlEvents.touchUpInside)
-		self.buttonBackgroundView.addSubview(retweetButton)
-
-		let likeButton = createButtonWithImage(imageName: "favoritebutton.png", x: 260, y: 5, width: 40, height: 40, borderWidth: 1, cornerRadius: 6, backgroundColor: UIColor(red: 0, green: 0.7569, blue: 0.8588, alpha: 1.0))
-		likeButton.addTarget(self, action: #selector(likeButtonTouched), for: UIControlEvents.touchUpInside)
-		self.buttonBackgroundView.addSubview(likeButton)
+		favoriteButton.addTarget(self, action: #selector(likeButtonTouched), for: UIControlEvents.touchUpInside)
 		
 		buttonBackgroundView.layer.borderWidth = 1
+		buttonBackgroundView.layer.borderColor = UIColor.lightGray.cgColor
     }
 
     override func didReceiveMemoryWarning() {
