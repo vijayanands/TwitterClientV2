@@ -24,8 +24,10 @@ class TweetCell: UITableViewCell {
 	@IBOutlet weak var inReplyToLabel: UILabel!
 	@IBOutlet weak var retweetCount: UILabel!
 	@IBOutlet weak var favoritesCount: UILabel!
+	var user_id: UInt64!
 	
 	func customInit(tweet: Tweet) {
+		user_id = tweet.id
 		nameLabel.text = tweet.user?.name as String?
 		usernameLabel.text = tweet.user?.screenName as String?
 		Utilities.setImage(forImage: profileImage, using: (tweet.user?.profileImageUrl!)!)
@@ -79,5 +81,4 @@ class TweetCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }

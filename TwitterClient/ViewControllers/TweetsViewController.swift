@@ -94,6 +94,10 @@ class TweetsViewController: UIViewController {
 		performSegue(withIdentifier: "NewTweetViewController", sender: nil)
 	}
 	
+	@IBAction func onTapOnProfileImage(_ sender: UITapGestureRecognizer) {
+		print("In tap on profile image")
+	}
+	
 	// MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
