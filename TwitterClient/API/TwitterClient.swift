@@ -130,4 +130,16 @@ class TwitterClient: BDBOAuth1SessionManager {
 		})
 	}
 	
+	func userInfo(id: UInt64, success: @escaping ((User) -> ()), failure: @escaping ((NSError) -> ())) {
+		var params = [String:Any?]()
+		params["user_id"] = id
+		get("1.1/users/show.json", parameters: params, success: { (task: URLSessionDataTask, response: Any?) in
+			let userInfo = response as! NSDictionary
+			let user = User(userDictionary: userInfo)
+			success(user)
+		}) { (task: URLSessionDataTask?, error: Error) in
+			failure(error as NSError)
+		}
+	}
+	
 }

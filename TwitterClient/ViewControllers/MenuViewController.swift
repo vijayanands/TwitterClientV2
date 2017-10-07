@@ -81,6 +81,16 @@ extension MenuViewController : UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
+		if indexPath.row == 0 {
+			let profilesViewNavigationController = viewControllers[indexPath.row] as! UINavigationController
+			let profilesViewController = profilesViewNavigationController.topViewController as! ProfilesViewController
+			let user = User.currentUser
+			user?.printUser()
+			profilesViewController.user = User.currentUser
+		} else if indexPath.row == 1 {
+		} else if indexPath.row == 2 {
+		} else if indexPath.row == 3 {
+		}
 		hamburgerViewController.contentViewController = viewControllers[indexPath.row]
 	}
 	

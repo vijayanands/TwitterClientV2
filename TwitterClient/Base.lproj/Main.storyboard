@@ -806,6 +806,15 @@
                         <viewLayoutGuide key="safeArea" id="PqW-Xu-fTi"/>
                     </view>
                     <navigationItem key="navigationItem" id="OKU-2x-Quv"/>
+                    <connections>
+                        <outlet property="followersCountLabel" destination="YOq-7Z-JRe" id="vY6-LR-tYM"/>
+                        <outlet property="followingCountLabel" destination="Qte-89-wae" id="p5V-Xi-rXl"/>
+                        <outlet property="nameLabel" destination="Khf-Id-3GI" id="jhM-FY-kOb"/>
+                        <outlet property="profileBannerImage" destination="4dU-JR-SeD" id="w0m-s1-LOc"/>
+                        <outlet property="profileImage" destination="QlQ-jg-i9e" id="tm0-cU-oaI"/>
+                        <outlet property="screennameLabel" destination="zJj-Lw-gNp" id="Uey-76-eN7"/>
+                        <outlet property="tweetCountLabel" destination="AoR-0I-X9l" id="St2-vA-rrG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6dL-1h-G1G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
