@@ -28,8 +28,6 @@ class TweetsViewController: UIViewController {
 		// add refresh control to table view
 		tweetsTable.insertSubview(refreshControl, at: 0)
 		
-//		self.navigationController?.navigationBar.barTintColor = UIColor(red: 72, green: 191, blue: 255, alpha: 1.0)
-//		[UIColor colorWithRed:0.28 green:0.75 blue:1.00 alpha:1.0];
 		self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.28, green: 0.75, blue: 1.0, alpha: 1.0)
 		
         // Do any additional setup after loading the view.
@@ -102,10 +100,10 @@ class TweetsViewController: UIViewController {
         // Pass the selected object to the new view controller.
 		let segueId = segue.identifier
 		let navigationController = segue.destination as! UINavigationController
-		if (segueId == "NewTweetSegue") {
+		if segueId == "NewTweetSegue" {
 			let newTweetViewController = navigationController.topViewController as! NewTweetViewController
 			newTweetViewController.customInit(delegate: self)
-		} else {
+		} else if segueId == "TweetDetailsSegue" {
 			let destinationViewController = navigationController.topViewController as! TweetDetailsViewController
 			let cell = sender as! TweetCell
 			let indexPath = tweetsTable.indexPath(for: cell)
@@ -162,7 +160,9 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let cell = tableView.cellForRow(at: indexPath) as! TweetCell
 		tweetsTable.deselectRow(at: indexPath, animated: true)
+		performSegue(withIdentifier: "TweetDetailsSegue", sender: cell)
 	}
 	
 	@objc func onTapOnProfileImage(_ sender: UITapGestureRecognizer) {

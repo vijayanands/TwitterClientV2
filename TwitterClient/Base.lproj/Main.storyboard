@@ -268,7 +268,6 @@
                                             <outlet property="timestampLabel" destination="Xnk-kz-JPZ" id="aXg-K5-2oO"/>
                                             <outlet property="tweetTextLabel" destination="Xsb-ZN-4j9" id="Mxa-TA-xaE"/>
                                             <outlet property="usernameLabel" destination="sIf-E9-nPO" id="iYO-HT-ddJ"/>
-                                            <segue destination="XhO-KB-7Aj" kind="show" id="4yC-oc-jWP"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -297,6 +296,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tweetsTable" destination="oBp-WL-RdW" id="V43-Hz-pHj"/>
+                        <segue destination="XhO-KB-7Aj" kind="presentation" identifier="TweetDetailsSegue" id="U0d-MO-1rD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NSe-dE-UHJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
