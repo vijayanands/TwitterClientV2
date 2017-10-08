@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NSDateMinimalTimeAgo
 
 class TweetViewCell: UITableViewCell {
 	@IBOutlet weak var profileImageView: UIImageView!

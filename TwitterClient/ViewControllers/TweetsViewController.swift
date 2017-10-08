@@ -22,6 +22,9 @@ class TweetsViewController: UIViewController {
 		tweetsTable.estimatedRowHeight = 130
 		tweetsTable.rowHeight = UITableViewAutomaticDimension
 		
+		let nibName = UINib(nibName: "TweetViewCell", bundle: nil)
+		tweetsTable.register(nibName, forCellReuseIdentifier: "TweetViewCell")
+		
 		// Initialize a UIRefreshControl
 		let refreshControl = UIRefreshControl()
 		refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
@@ -105,7 +108,7 @@ class TweetsViewController: UIViewController {
 			newTweetViewController.customInit(delegate: self)
 		} else if segueId == "TweetDetailsSegue" {
 			let destinationViewController = navigationController.topViewController as! TweetDetailsViewController
-			let cell = sender as! TweetCell
+			let cell = sender as! TweetViewCell
 			let indexPath = tweetsTable.indexPath(for: cell)
 			destinationViewController.tweet = tweets[(indexPath?.row)!]
 			destinationViewController.delegate = self
@@ -147,27 +150,27 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tweetsTable.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
+		let cell = tweetsTable.dequeueReusableCell(withIdentifier: "TweetViewCell", for: indexPath) as! TweetViewCell
 		cell.customInit(tweet: tweets[indexPath.row])
 		// add tap gesture on the cell
 		let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.onTapOnProfileImage(_:)))
 		
-		cell.profileImage.isUserInteractionEnabled = true
-		cell.profileImage.tag = indexPath.row
-		cell.profileImage.addGestureRecognizer(tapGestureRecognizer)
+		cell.profileImageView.isUserInteractionEnabled = true
+		cell.profileImageView.tag = indexPath.row
+		cell.profileImageView.addGestureRecognizer(tapGestureRecognizer)
 		
 		return cell
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let cell = tableView.cellForRow(at: indexPath) as! TweetCell
+		let cell = tableView.cellForRow(at: indexPath) as! TweetViewCell
 		tweetsTable.deselectRow(at: indexPath, animated: true)
 		performSegue(withIdentifier: "TweetDetailsSegue", sender: cell)
 	}
 	
 	@objc func onTapOnProfileImage(_ sender: UITapGestureRecognizer) {
 		let cellView = sender.view?.superview?.superview
-		let tweetCell = cellView as! TweetCell
+		let tweetCell = cellView as! TweetViewCell
 		TwitterClient.sharedInstance?.userInfo(id: tweetCell.userId, screenName: tweetCell.screenName, success: { (user: User) in
 			let storyboard = UIStoryboard(name: "Main", bundle: nil)
 			let profilesNavigationController = storyboard.instantiateViewController(withIdentifier: "ProfilesNavigationController") as! UINavigationController
