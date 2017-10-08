@@ -13,6 +13,8 @@ class AccountsViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+		// set title in navigation bar
+		self.navigationController?.navigationBar.topItem?.title = "Accounts Info"
     }
 
     override func didReceiveMemoryWarning() {

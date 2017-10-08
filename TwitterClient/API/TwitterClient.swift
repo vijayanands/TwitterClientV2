@@ -63,59 +63,35 @@ class TwitterClient: BDBOAuth1SessionManager {
 	}
 	
 	func homeTimeline(since: UInt64?, success: @escaping (([Tweet]) -> Void), failure: @escaping ((NSError) -> Void)) {
+		getTweets(urlPath: "1.1/statuses/home_timeline.json", id: nil, since: since, success: success, failure: failure)
+	}
+	
+	func mentionsTimeline(since: UInt64?, success: @escaping (([Tweet]) -> Void), failure: @escaping ((NSError) -> Void)) {
+		getTweets(urlPath: "1.1/statuses/mentions_timeline.json", id: nil, since: since, success: success, failure: failure)
+	}
+	
+	func userTimeline(id: UInt64, since: UInt64?, success: @escaping (([Tweet]) -> Void), failure: @escaping ((NSError) -> Void)) {
+		getTweets(urlPath: "1.1/statuses/user_timeline.json", id: id, since: since, success: success, failure: failure)
+	}
+	
+	fileprivate func getTweets(urlPath: String, id: UInt64?, since: UInt64?, success: @escaping (([Tweet]) -> Void), failure: @escaping ((NSError) -> Void)) {
 		var params = [String:Any?]()
 		params["count"] = 20
 		params["exclude_replies"] = false
+		if id != nil {
+			params["user_id"] = id
+		}
 		if (since != nil) {
 			params["since"] = since
 		}
 		
-		get("1.1/statuses/home_timeline.json", parameters: params, success:{ (task: URLSessionDataTask, response: Any?) in
+		get(urlPath, parameters: params, success:{ (task: URLSessionDataTask, response: Any?) in
 			let dictionaries = response as! [NSDictionary]
 			let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries)
 			success(tweets)
 		}, failure: { (task: URLSessionDataTask?, error: Error) in
 			failure(error as NSError)
 		} as (URLSessionDataTask?, Error) -> Void)
-	}
-	
-	func mentionsTimeline(since: UInt64?, success: @escaping (([Tweet]) -> Void), failure: @escaping ((NSError) -> Void)) {
-		var params = [String:Any?]()
-		params["count"] = 20
-		params["exclude_replies"] = false
-		if (since != nil) {
-			params["since"] = since
-		}
-		
-		get("1.1/statuses/mentions_timeline.json", parameters: params, success:{ (task: URLSessionDataTask, response: Any?) in
-			let dictionaries = response as! [NSDictionary]
-			let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries)
-			success(tweets)
-		}, failure: { (task: URLSessionDataTask?, error: Error) in
-			failure(error as NSError)
-			} as (URLSessionDataTask?, Error) -> Void)
-	}
-	
-	func userTimeline(id: UInt64, since: UInt64?, success: @escaping (([Tweet]) -> Void), failure: @escaping ((NSError) -> Void)) {
-		var params = [String:Any?]()
-		params["count"] = 20
-		params["user_id"] = id
-		params["exclude_replies"] = false
-		if (since != nil) {
-			params["since"] = since
-		}
-		
-		get("1.1/statuses/user_timeline.json", parameters: params, success:{ (task: URLSessionDataTask, response: Any?) in
-			let dictionaries = response as! [NSDictionary]
-			let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries)
-			success(tweets)
-		}, failure: { (task: URLSessionDataTask?, error: Error) in
-			failure(error as NSError)
-			} as (URLSessionDataTask?, Error) -> Void)
-	}
-	
-	fileprivate func getTweets() {
-		// TBD :
 	}
 	
 	func retweet(id: UInt64, success: @escaping (() -> Void), failure: @escaping ((NSError) -> Void)){
