@@ -1,4 +1,4 @@
--o//
+//
 //  TweetsViewController.swift
 //  TwitterClient
 //
@@ -94,20 +94,6 @@ class TweetsViewController: UIViewController {
 		performSegue(withIdentifier: "NewTweetViewController", sender: nil)
 	}
 	
-	@IBAction func onTapOnProfileImage(_ sender: UITapGestureRecognizer) {
-		let cellView = sender.view?.superview?.superview
-		let tweetCell = cellView as! TweetCell
-		TwitterClient.sharedInstance?.userInfo(id: tweetCell.userId, screenName: tweetCell.screenName, success: { (user: User) in
-			let storyboard = UIStoryboard(name: "Main", bundle: nil)
-			let profilesNavigationController = storyboard.instantiateViewController(withIdentifier: "ProfilesNavigationController") as! UINavigationController
-			let profilesViewController = profilesNavigationController.topViewController as! ProfilesViewController
-			profilesViewController.user = user
-			self.hamburgerViewController.contentViewController = profilesNavigationController
-		}, failure: { (error: NSError) in
-			print("error: \(error.localizedDescription)")
-		})
-	}
-	
 	// MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -165,11 +151,32 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tweetsTable.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
 		cell.customInit(tweet: tweets[indexPath.row])
+		// add tap gesture on the cell
+		let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.onTapOnProfileImage(_:)))
+		
+		cell.profileImage.isUserInteractionEnabled = true
+		cell.profileImage.tag = indexPath.row
+		cell.profileImage.addGestureRecognizer(tapGestureRecognizer)
+		
 		return cell
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tweetsTable.deselectRow(at: indexPath, animated: true)
+	}
+	
+	@objc func onTapOnProfileImage(_ sender: UITapGestureRecognizer) {
+		let cellView = sender.view?.superview?.superview
+		let tweetCell = cellView as! TweetCell
+		TwitterClient.sharedInstance?.userInfo(id: tweetCell.userId, screenName: tweetCell.screenName, success: { (user: User) in
+			let storyboard = UIStoryboard(name: "Main", bundle: nil)
+			let profilesNavigationController = storyboard.instantiateViewController(withIdentifier: "ProfilesNavigationController") as! UINavigationController
+			let profilesViewController = profilesNavigationController.topViewController as! ProfilesViewController
+			profilesViewController.user = user
+			self.hamburgerViewController.contentViewController = profilesNavigationController
+		}, failure: { (error: NSError) in
+			print("error: \(error.localizedDescription)")
+		})
 	}
 }
 

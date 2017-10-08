@@ -188,9 +188,6 @@
                                                         <constraint firstAttribute="height" constant="65" id="2sR-Vf-EAN"/>
                                                         <constraint firstAttribute="width" constant="65" id="bzp-yU-KQu"/>
                                                     </constraints>
-                                                    <connections>
-                                                        <outletCollection property="gestureRecognizers" destination="5Jc-BJ-efX" appends="YES" id="Fzm-G8-EMM"/>
-                                                    </connections>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In Reply To: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ljK-H4-s2p">
                                                     <rect key="frame" x="79" y="61" width="69" height="14.5"/>
@@ -303,11 +300,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NSe-dE-UHJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="5Jc-BJ-efX">
-                    <connections>
-                        <action selector="onTapOnProfileImage:" destination="vnm-4R-BRM" id="mNA-dl-tOu"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="948" y="1791"/>
         </scene>
