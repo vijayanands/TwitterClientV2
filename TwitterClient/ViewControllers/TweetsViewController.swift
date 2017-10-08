@@ -1,4 +1,4 @@
-//
+-o//
 //  TweetsViewController.swift
 //  TwitterClient
 //
@@ -13,7 +13,7 @@ class TweetsViewController: UIViewController {
 
 	var tweets: [Tweet]!
 	var isMoreDataLoading = false
-
+	var hamburgerViewController: HamburgerViewController!
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,7 +95,17 @@ class TweetsViewController: UIViewController {
 	}
 	
 	@IBAction func onTapOnProfileImage(_ sender: UITapGestureRecognizer) {
-		performSegue(withIdentifier: "ProfilesViewSegue", sender: sender)
+		let cellView = sender.view?.superview?.superview
+		let tweetCell = cellView as! TweetCell
+		TwitterClient.sharedInstance?.userInfo(id: tweetCell.userId, screenName: tweetCell.screenName, success: { (user: User) in
+			let storyboard = UIStoryboard(name: "Main", bundle: nil)
+			let profilesNavigationController = storyboard.instantiateViewController(withIdentifier: "ProfilesNavigationController") as! UINavigationController
+			let profilesViewController = profilesNavigationController.topViewController as! ProfilesViewController
+			profilesViewController.user = user
+			self.hamburgerViewController.contentViewController = profilesNavigationController
+		}, failure: { (error: NSError) in
+			print("error: \(error.localizedDescription)")
+		})
 	}
 	
 	// MARK: - Navigation
@@ -109,16 +119,6 @@ class TweetsViewController: UIViewController {
 		if (segueId == "NewTweetSegue") {
 			let newTweetViewController = navigationController.topViewController as! NewTweetViewController
 			newTweetViewController.customInit(delegate: self)
-		} else if segueId == "ProfilesViewSegue" {
-			let gestureRecognizer = sender as! UITapGestureRecognizer
-			let cellView = gestureRecognizer.view?.superview?.superview
-			let tweetCell = cellView as! TweetCell
-			TwitterClient.sharedInstance?.userInfo(id: tweetCell.userId, screenName: tweetCell.screenName, success: { (user: User) in
-				let profilesViewController = navigationController.topViewController as! ProfilesViewController
-				profilesViewController.user = user
-			}, failure: { (error: NSError) in
-				print("error: \(error.localizedDescription)")
-			})
 		} else {
 			let destinationViewController = navigationController.topViewController as! TweetDetailsViewController
 			let cell = sender as! TweetCell

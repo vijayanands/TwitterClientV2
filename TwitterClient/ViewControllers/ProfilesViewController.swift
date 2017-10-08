@@ -60,6 +60,9 @@ class ProfilesViewController: UIViewController {
 		tweetsTable.dataSource = self
 		tweetsTable.estimatedRowHeight = 130
 		tweetsTable.rowHeight = UITableViewAutomaticDimension
+		let nibName = UINib(nibName: "TweetViewCell", bundle: nil)
+		tweetsTable.register(nibName, forCellReuseIdentifier: "TweetViewCell")
+		
 		
 		// Initialize a UIRefreshControl
 		let refreshControl = UIRefreshControl()
@@ -132,7 +135,8 @@ extension ProfilesViewController : UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tweetsTable.dequeueReusableCell(withIdentifier: "ProfilesViewTweetCell", for: indexPath) as! ProfilesViewTweetCell
+		let cell = tweetsTable.dequeueReusableCell(withIdentifier: "TweetViewCell", for: indexPath) as! TweetViewCell
+		cell.customInit(tweet: tweets[indexPath.row])
 		return cell
 	}
 	

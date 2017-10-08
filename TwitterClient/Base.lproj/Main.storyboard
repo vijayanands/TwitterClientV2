@@ -160,21 +160,21 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JbX-OV-R7W">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="retweet" translatesAutoresizingMaskIntoConstraints="NO" id="JbX-OV-R7W">
                                                     <rect key="frame" x="50" y="4" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="DUW-ZA-FzX"/>
                                                         <constraint firstAttribute="width" constant="25" id="ME6-ZL-XUI"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uZr-g1-tQM">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="retweet" translatesAutoresizingMaskIntoConstraints="NO" id="uZr-g1-tQM">
                                                     <rect key="frame" x="88" y="148.5" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="DnB-Xo-gnk"/>
                                                         <constraint firstAttribute="height" constant="25" id="Mm6-Vi-mT0"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cGR-JJ-iUl">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="cGR-JJ-iUl">
                                                     <rect key="frame" x="262" y="148.5" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="TbP-Pc-bni"/>
@@ -300,7 +300,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tweetsTable" destination="oBp-WL-RdW" id="V43-Hz-pHj"/>
-                        <segue destination="uQb-xo-o8e" kind="presentation" identifier="ProfilesViewSegue" id="bu5-6Z-I3S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NSe-dE-UHJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -810,16 +809,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OEc-Cm-3wF">
                                 <rect key="frame" x="0.0" y="271" width="375" height="396"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfilesViewTweetCell" rowHeight="157" id="FZo-QP-62l" customClass="ProfilesViewTweetCell" customModule="TwitterClient" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="157"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FZo-QP-62l" id="ipy-Ip-ibl">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="156.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.55972232740000005" green="1" blue="0.86103289360000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -962,7 +951,9 @@
         <image name="home" width="30" height="30"/>
         <image name="logout" width="30" height="30"/>
         <image name="replybutton" width="30" height="30"/>
+        <image name="retweet" width="12" height="12"/>
         <image name="retweetbutton" width="30" height="30"/>
+        <image name="star" width="12" height="12"/>
         <image name="tweet" width="30" height="30"/>
         <image name="twitter Image" width="600" height="600"/>
     </resources>

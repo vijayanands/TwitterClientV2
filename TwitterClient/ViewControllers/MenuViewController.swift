@@ -19,10 +19,10 @@ class MenuViewController: UIViewController {
 	
 	@IBOutlet weak var menuTableView: UITableView!
 	
-	var tweetsViewController: UIViewController!
-	var mentionsViewController: UIViewController!
-	var profilesViewController: UIViewController!
-	var accountsViewController: UIViewController!
+	var tweetsNavigationController: UIViewController!
+	var mentionsNavigationController: UIViewController!
+	var profilesNavigationController: UIViewController!
+	var accountsNavigationController: UIViewController!
 	
 	var viewControllers: [UIViewController] = []
 	
@@ -37,17 +37,19 @@ class MenuViewController: UIViewController {
 		
         // Do any additional setup after loading the view.
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		tweetsViewController = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationController")
-		mentionsViewController = storyboard.instantiateViewController(withIdentifier: "MentionsNavigationController")
-		profilesViewController = storyboard.instantiateViewController(withIdentifier: "ProfilesNavigationController")
-		accountsViewController = storyboard.instantiateViewController(withIdentifier: "AccountsNavigationController")
+		tweetsNavigationController = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationController")
+		mentionsNavigationController = storyboard.instantiateViewController(withIdentifier: "MentionsNavigationController")
+		profilesNavigationController = storyboard.instantiateViewController(withIdentifier: "ProfilesNavigationController")
+		accountsNavigationController = storyboard.instantiateViewController(withIdentifier: "AccountsNavigationController")
 		
-		viewControllers.append(profilesViewController)
-		viewControllers.append(tweetsViewController)
-		viewControllers.append(mentionsViewController)
-		viewControllers.append(accountsViewController)
+		viewControllers.append(profilesNavigationController)
+		viewControllers.append(tweetsNavigationController)
+		viewControllers.append(mentionsNavigationController)
+		viewControllers.append(accountsNavigationController)
 		
-		hamburgerViewController.contentViewController = tweetsViewController
+		let tweetsViewController = (tweetsNavigationController as! UINavigationController).topViewController as! TweetsViewController
+		tweetsViewController.hamburgerViewController = hamburgerViewController
+		hamburgerViewController.contentViewController = tweetsNavigationController
     }
 
     override func didReceiveMemoryWarning() {
@@ -88,6 +90,9 @@ extension MenuViewController : UITableViewDelegate, UITableViewDataSource {
 			user?.printUser()
 			profilesViewController.user = User.currentUser
 		} else if indexPath.row == 1 {
+			let tweetsNavigationController = viewControllers[indexPath.row] as! UINavigationController
+			let tweetsViewController = tweetsNavigationController.topViewController as! TweetsViewController
+			tweetsViewController.hamburgerViewController = hamburgerViewController
 		} else if indexPath.row == 2 {
 		} else if indexPath.row == 3 {
 		}
