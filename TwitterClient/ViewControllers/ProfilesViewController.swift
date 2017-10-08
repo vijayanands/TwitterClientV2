@@ -16,11 +16,14 @@ class ProfilesViewController: UIViewController {
 	@IBOutlet weak var tweetCountLabel: UILabel!
 	@IBOutlet weak var followingCountLabel: UILabel!
 	@IBOutlet weak var followersCountLabel: UILabel!
+	@IBOutlet weak var tweetsTable: UITableView!
+
+	var tweets: [Tweet]!
+	var isMoreDataLoading = false
 	
 	var user: User! {
 		didSet {
 			view.layoutIfNeeded()
-			
 			user.printUser()
 			nameLabel.text = user.name as String?
 			screennameLabel.text = "@" + (user.screenName as String?)!
@@ -45,6 +48,7 @@ class ProfilesViewController: UIViewController {
 			} else {
 				tweetCountLabel.text = "0"
 			}
+			loadTweets()
 		}
 	}
 
@@ -52,6 +56,16 @@ class ProfilesViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+		tweetsTable.delegate = self
+		tweetsTable.dataSource = self
+		tweetsTable.estimatedRowHeight = 130
+		tweetsTable.rowHeight = UITableViewAutomaticDimension
+		
+		// Initialize a UIRefreshControl
+		let refreshControl = UIRefreshControl()
+		refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
+		// add refresh control to table view
+		tweetsTable.insertSubview(refreshControl, at: 0)
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,7 +73,44 @@ class ProfilesViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+	@objc func refreshControlAction(_ refreshControl: UIRefreshControl) {
+		// ... Create the URLRequest `myRequest` ...
+		loadTweets()
+		// Tell the refreshControl to stop spinning
+		refreshControl.endRefreshing()
+	}
+	
+	func loadTweets() {
+		if user != nil {
+			TwitterClient.sharedInstance?.userTimeline(id: user.id, since: nil, success: { (tweets: [Tweet]) in
+				self.tweets = tweets
+				for tweet in self.tweets {
+					tweet.printTweet()
+				}
+				self.tweetsTable.reloadData()
+			}, failure: { (error:NSError) in
+				print("error: \(error.localizedDescription)")
+			})
+		}
+	}
+	
+	func incrementallyLoadTweets() {
+		TwitterClient.sharedInstance?.userTimeline(id: user.id, since: tweets[0].id, success: { (tweets: [Tweet]) in
+			let currentSize = self.tweets.count
+			self.tweets = self.tweets + tweets
+			for tweet in self.tweets {
+				tweet.printTweet()
+			}
+			self.tweetsTable.reloadData()
+			let indexPath = IndexPath(row: currentSize, section: 0)
+			self.tweetsTable.scrollToRow(at: indexPath, at: UITableViewScrollPosition.top, animated: true)
+		}, failure: { (error: NSError) in
+			print("error: \(error.localizedDescription)")
+		})
+		// Update flag
+		isMoreDataLoading = false
+	}
+	
     /*
     // MARK: - Navigation
 
@@ -71,3 +122,40 @@ class ProfilesViewController: UIViewController {
     */
 
 }
+
+extension ProfilesViewController : UITableViewDelegate, UITableViewDataSource {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		if tweets != nil {
+			return tweets.count
+		}
+		return 0
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tweetsTable.dequeueReusableCell(withIdentifier: "ProfilesViewTweetCell", for: indexPath) as! ProfilesViewTweetCell
+		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tweetsTable.deselectRow(at: indexPath, animated: true)
+	}
+}
+
+extension ProfilesViewController : UIScrollViewDelegate {
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		// Calculate the position of one screen length before the bottom of the results
+		let scrollViewContentHeight = tweetsTable.contentSize.height
+		let tableViewBounds = tweetsTable.bounds.size.height
+		let scrollOffsetThreshold = scrollViewContentHeight - tableViewBounds
+		
+		// When the user has scrolled past the threshold, start requesting
+		let currentOffset = scrollView.contentOffset.y
+		if(currentOffset > scrollOffsetThreshold && tweetsTable.isDragging) {
+			isMoreDataLoading = true
+			
+			// Code to load more results
+			incrementallyLoadTweets()
+		}
+	}
+}
+

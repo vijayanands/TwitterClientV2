@@ -24,10 +24,12 @@ class TweetCell: UITableViewCell {
 	@IBOutlet weak var inReplyToLabel: UILabel!
 	@IBOutlet weak var retweetCount: UILabel!
 	@IBOutlet weak var favoritesCount: UILabel!
-	var user_id: UInt64!
+	var userId: UInt64!
+	var screenName: String!
 	
 	func customInit(tweet: Tweet) {
-		user_id = tweet.id
+		userId = tweet.id
+		screenName = tweet.user?.screenName as String?
 		nameLabel.text = tweet.user?.name as String?
 		usernameLabel.text = tweet.user?.screenName as String?
 		Utilities.setImage(forImage: profileImage, using: (tweet.user?.profileImageUrl!)!)

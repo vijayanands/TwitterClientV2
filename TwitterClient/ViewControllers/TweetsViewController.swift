@@ -95,7 +95,7 @@ class TweetsViewController: UIViewController {
 	}
 	
 	@IBAction func onTapOnProfileImage(_ sender: UITapGestureRecognizer) {
-		print("In tap on profile image")
+		performSegue(withIdentifier: "ProfilesViewSegue", sender: sender)
 	}
 	
 	// MARK: - Navigation
@@ -109,6 +109,16 @@ class TweetsViewController: UIViewController {
 		if (segueId == "NewTweetSegue") {
 			let newTweetViewController = navigationController.topViewController as! NewTweetViewController
 			newTweetViewController.customInit(delegate: self)
+		} else if segueId == "ProfilesViewSegue" {
+			let gestureRecognizer = sender as! UITapGestureRecognizer
+			let cellView = gestureRecognizer.view?.superview?.superview
+			let tweetCell = cellView as! TweetCell
+			TwitterClient.sharedInstance?.userInfo(id: tweetCell.userId, screenName: tweetCell.screenName, success: { (user: User) in
+				let profilesViewController = navigationController.topViewController as! ProfilesViewController
+				profilesViewController.user = user
+			}, failure: { (error: NSError) in
+				print("error: \(error.localizedDescription)")
+			})
 		} else {
 			let destinationViewController = navigationController.topViewController as! TweetDetailsViewController
 			let cell = sender as! TweetCell

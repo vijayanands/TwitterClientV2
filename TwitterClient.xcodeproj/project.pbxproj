@@ -26,6 +26,7 @@
 		AFC93D151F867FB100EDC526 /* ProfilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC93D141F867FB100EDC526 /* ProfilesViewController.swift */; };
 		AFC93D171F868A7E00EDC526 /* HamburgerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC93D161F868A7E00EDC526 /* HamburgerViewController.swift */; };
 		AFC93D1B1F86FE2C00EDC526 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC93D1A1F86FE2C00EDC526 /* MenuViewController.swift */; };
+		AFD5AD0A1F8A89570000D543 /* ProfilesViewTweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD5AD091F8A89570000D543 /* ProfilesViewTweetCell.swift */; };
 		AFE652CB1F80717F00121AAF /* NewTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE652CA1F80717F00121AAF /* NewTweetViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		AFC93D141F867FB100EDC526 /* ProfilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfilesViewController.swift; path = /Users/sujavijay/workspace/codepath/TwitterClientV2/TwitterClient/ViewControllers/ProfilesViewController.swift; sourceTree = "<absolute>"; };
 		AFC93D161F868A7E00EDC526 /* HamburgerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HamburgerViewController.swift; sourceTree = "<group>"; };
 		AFC93D1A1F86FE2C00EDC526 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		AFD5AD091F8A89570000D543 /* ProfilesViewTweetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesViewTweetCell.swift; sourceTree = "<group>"; };
 		AFE652CA1F80717F00121AAF /* NewTweetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTweetViewController.swift; sourceTree = "<group>"; };
 		AFE652CC1F81658100121AAF /* TwitterClient.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TwitterClient.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				AF56BDB91F7F6D2F00AC58B1 /* TweetCell.swift */,
+				AFD5AD091F8A89570000D543 /* ProfilesViewTweetCell.swift */,
 				AF8A3DC61F875AB400C3487C /* MenuCell.swift */,
 			);
 			path = Views;
@@ -249,12 +252,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-TwitterClient/Pods-TwitterClient-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/BDBOAuth1Manager/BDBOAuth1Manager.framework",
+				"${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework",
 				"${BUILT_PRODUCTS_DIR}/NSDateMinimalTimeAgo/NSDateMinimalTimeAgo.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BDBOAuth1Manager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLEX.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSDateMinimalTimeAgo.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -316,6 +321,7 @@
 				AF6A69CA1F7B66F30020AF40 /* AppDelegate.swift in Sources */,
 				AFE652CB1F80717F00121AAF /* NewTweetViewController.swift in Sources */,
 				AFC93D131F867FAE00EDC526 /* AccountsViewController.swift in Sources */,
+				AFD5AD0A1F8A89570000D543 /* ProfilesViewTweetCell.swift in Sources */,
 				AF8A3DC71F875AB400C3487C /* MenuCell.swift in Sources */,
 				AFC93D111F867F8400EDC526 /* MentionsViewController.swift in Sources */,
 			);
