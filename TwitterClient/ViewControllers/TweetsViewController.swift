@@ -32,7 +32,10 @@ class TweetsViewController: UIViewController {
 		tweetsTable.insertSubview(refreshControl, at: 0)
 		
 		self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.28, green: 0.75, blue: 1.0, alpha: 1.0)
-		
+		// set title in navigation bar
+		let user = User.currentUser!
+		self.navigationController?.navigationBar.topItem?.title = user.name! as String + "'s Home"
+
         // Do any additional setup after loading the view.
 		loadTweets()
     }

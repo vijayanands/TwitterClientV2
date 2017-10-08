@@ -69,6 +69,9 @@ class ProfilesViewController: UIViewController {
 		refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
 		// add refresh control to table view
 		tweetsTable.insertSubview(refreshControl, at: 0)
+		
+		// set title in navigation bar
+		self.navigationController?.navigationBar.topItem?.title = user.name! as String + "'s Profile"
     }
 
     override func didReceiveMemoryWarning() {

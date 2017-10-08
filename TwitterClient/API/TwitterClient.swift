@@ -79,6 +79,23 @@ class TwitterClient: BDBOAuth1SessionManager {
 		} as (URLSessionDataTask?, Error) -> Void)
 	}
 	
+	func mentionsTimeline(since: UInt64?, success: @escaping (([Tweet]) -> Void), failure: @escaping ((NSError) -> Void)) {
+		var params = [String:Any?]()
+		params["count"] = 20
+		params["exclude_replies"] = false
+		if (since != nil) {
+			params["since"] = since
+		}
+		
+		get("1.1/statuses/mentions_timeline.json", parameters: params, success:{ (task: URLSessionDataTask, response: Any?) in
+			let dictionaries = response as! [NSDictionary]
+			let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries)
+			success(tweets)
+		}, failure: { (task: URLSessionDataTask?, error: Error) in
+			failure(error as NSError)
+			} as (URLSessionDataTask?, Error) -> Void)
+	}
+	
 	func userTimeline(id: UInt64, since: UInt64?, success: @escaping (([Tweet]) -> Void), failure: @escaping ((NSError) -> Void)) {
 		var params = [String:Any?]()
 		params["count"] = 20
@@ -95,6 +112,10 @@ class TwitterClient: BDBOAuth1SessionManager {
 		}, failure: { (task: URLSessionDataTask?, error: Error) in
 			failure(error as NSError)
 			} as (URLSessionDataTask?, Error) -> Void)
+	}
+	
+	fileprivate func getTweets() {
+		// TBD :
 	}
 	
 	func retweet(id: UInt64, success: @escaping (() -> Void), failure: @escaping ((NSError) -> Void)){

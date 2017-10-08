@@ -153,7 +153,7 @@
             </objects>
             <point key="canvasLocation" x="948" y="1791"/>
         </scene>
-        <!--Tweet-->
+        <!--Compose Tweet-->
         <scene sceneID="n6K-Pv-V9S">
             <objects>
                 <viewController storyboardIdentifier="NewTweetViewController" id="Uri-RU-iGb" customClass="NewTweetViewController" customModule="TwitterClient" customModuleProvider="target" sceneMemberID="viewController">
@@ -215,7 +215,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DHy-Yy-Hdh"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Tweet" id="8dq-ND-Xqa">
+                    <navigationItem key="navigationItem" title="Compose Tweet" id="8dq-ND-Xqa">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" image="cancel" id="fit-xv-XZs">
                             <connections>
                                 <action selector="onCancel:" destination="Uri-RU-iGb" id="32P-dA-IJH"/>
@@ -239,7 +239,7 @@
             </objects>
             <point key="canvasLocation" x="2617" y="1792"/>
         </scene>
-        <!--Tweet Details View Controller-->
+        <!--Tweet Details-->
         <scene sceneID="TAx-UI-Mme">
             <objects>
                 <viewController id="4LE-Sr-BEV" customClass="TweetDetailsViewController" customModule="TwitterClient" customModuleProvider="target" sceneMemberID="viewController">
@@ -412,7 +412,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BFI-Op-gCK"/>
                     </view>
-                    <navigationItem key="navigationItem" id="rMS-KB-NLV">
+                    <navigationItem key="navigationItem" title="Tweet Details" id="rMS-KB-NLV">
                         <barButtonItem key="leftBarButtonItem" title="Home" image="home" id="4Gt-5G-HRe">
                             <connections>
                                 <action selector="homeButtonSelected:" destination="4LE-Sr-BEV" id="ReH-IB-gLs"/>
@@ -688,14 +688,29 @@
                     <view key="view" contentMode="scaleToFill" id="q0f-gg-JMB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rlb-NB-fZp">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Rlb-NB-fZp" firstAttribute="bottom" secondItem="rLp-nf-KBS" secondAttribute="bottom" id="BgD-03-QGB"/>
+                            <constraint firstItem="Rlb-NB-fZp" firstAttribute="trailing" secondItem="rLp-nf-KBS" secondAttribute="trailing" id="VzL-UL-kFK"/>
+                            <constraint firstItem="Rlb-NB-fZp" firstAttribute="top" secondItem="q0f-gg-JMB" secondAttribute="top" id="YGd-h9-VS2"/>
+                            <constraint firstItem="Rlb-NB-fZp" firstAttribute="leading" secondItem="rLp-nf-KBS" secondAttribute="leading" id="hZI-RW-979"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="rLp-nf-KBS"/>
                     </view>
                     <navigationItem key="navigationItem" id="FAt-6T-W5b"/>
+                    <connections>
+                        <outlet property="tweetsTable" destination="Rlb-NB-fZp" id="hXG-jy-TVU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DZ2-y1-mMc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4369" y="1792"/>
+            <point key="canvasLocation" x="4368.8000000000002" y="1791.4542728635683"/>
         </scene>
         <!--Accounts View Controller-->
         <scene sceneID="1gy-B1-zpM">
@@ -798,6 +813,6 @@
         <image name="twitter Image" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="atB-b0-BDG"/>
+        <segue reference="Lxq-YU-Shj"/>
     </inferredMetricsTieBreakers>
 </document>
