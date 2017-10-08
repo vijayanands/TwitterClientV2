@@ -37,7 +37,7 @@ class TweetsViewController: UIViewController {
 		self.navigationController?.navigationBar.topItem?.title = user.name! as String + "'s Home"
 
         // Do any additional setup after loading the view.
-		loadTweets()
+		loadTweets(since: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,36 +54,25 @@ class TweetsViewController: UIViewController {
 	// Hides the RefreshControl
 	@objc func refreshControlAction(_ refreshControl: UIRefreshControl) {
 		// ... Create the URLRequest `myRequest` ...
-		loadTweets()
+		loadTweets(since: nil)
 		// Tell the refreshControl to stop spinning
 		refreshControl.endRefreshing()
 	}
 	
-	func loadTweets() {
-		TwitterClient.sharedInstance?.homeTimeline(since: nil, success: { (tweets: [Tweet]) in
-			self.tweets = tweets
-			for tweet in self.tweets {
-				tweet.printTweet()
+	func loadTweets(since: UInt64?) {
+		TwitterClient.sharedInstance?.homeTimeline(since: since, success: { (tweets: [Tweet]) in
+			var currentSize: Int!
+			if since != nil {
+				currentSize = self.tweets.count
+				self.tweets = self.tweets + tweets
+			}
+			else {
+				currentSize = 0
+				self.tweets = tweets
 			}
 			self.tweetsTable.reloadData()
-		}, failure: { (error: NSError) in
-			print("error: \(error.localizedDescription)")
-		})
-	}
-	
-	func addTweetToTweetsTable(tweet:Tweet) {
-		self.tweets.insert(tweet, at: 0)
-		tweetsTable.reloadData()
-	}
-	
-	func incrementallyLoadTweets() {
-		TwitterClient.sharedInstance?.homeTimeline(since: tweets[0].id, success: { (tweets: [Tweet]) in
-			let currentSize = self.tweets.count
-			self.tweets = self.tweets + tweets
-			for tweet in self.tweets {
-				tweet.printTweet()
-			}
-			self.tweetsTable.reloadData()
+			
+			// position the table at the next set of rows.
 			let indexPath = IndexPath(row: currentSize, section: 0)
 			self.tweetsTable.scrollToRow(at: indexPath, at: UITableViewScrollPosition.top, animated: true)
 		}, failure: { (error: NSError) in
@@ -91,6 +80,11 @@ class TweetsViewController: UIViewController {
 		})
 		// Update flag
 		isMoreDataLoading = false
+	}
+	
+	func addTweetToTweetsTable(tweet:Tweet) {
+		self.tweets.insert(tweet, at: 0)
+		tweetsTable.reloadData()
 	}
 	
 	@IBAction func onCompose(_ sender: Any) {
@@ -125,7 +119,6 @@ extension TweetsViewController: NewTweetViewControllerDelegate {
 		if value == true {
 			print("Updating Tweets")
 			self.addTweetToTweetsTable(tweet: tweet) // this does not call the network request, but directly add to the tweets array
-//			self.loadTweets()
 		} else {
 			print("Unable to Update Tweet")
 		}
@@ -137,7 +130,7 @@ extension TweetsViewController: TweetDetailsViewControllerDelegate {
 		print("In Tweet Detail Delegate")
 		if value == true {
 			print("Updating Tweets")
-			self.loadTweets()
+			self.loadTweets(since: nil)
 		} else {
 			print("Unable to Update Tweet")
 		}
@@ -199,7 +192,7 @@ extension TweetsViewController : UIScrollViewDelegate {
 			isMoreDataLoading = true
 			
 			// Code to load more results
-			incrementallyLoadTweets()
+			loadTweets(since: tweets[0].id)
 		}
 	}
 }

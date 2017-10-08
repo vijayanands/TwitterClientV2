@@ -48,7 +48,7 @@ class ProfilesViewController: UIViewController {
 			} else {
 				tweetCountLabel.text = "0"
 			}
-			loadTweets()
+			loadTweets(since: nil)
 		}
 	}
 
@@ -81,33 +81,25 @@ class ProfilesViewController: UIViewController {
     
 	@objc func refreshControlAction(_ refreshControl: UIRefreshControl) {
 		// ... Create the URLRequest `myRequest` ...
-		loadTweets()
+		loadTweets(since: nil)
 		// Tell the refreshControl to stop spinning
 		refreshControl.endRefreshing()
 	}
 	
-	func loadTweets() {
-		if user != nil {
-			TwitterClient.sharedInstance?.userTimeline(id: user.id, since: nil, success: { (tweets: [Tweet]) in
+	func loadTweets(since: UInt64?) {
+		TwitterClient.sharedInstance?.userTimeline(id: user.id, since: since, success: { (tweets: [Tweet]) in
+			var currentSize: Int!
+			if since != nil {
+				currentSize = self.tweets.count
+				self.tweets = self.tweets + tweets
+			}
+			else {
+				currentSize = 0
 				self.tweets = tweets
-				for tweet in self.tweets {
-					tweet.printTweet()
-				}
-				self.tweetsTable.reloadData()
-			}, failure: { (error:NSError) in
-				print("error: \(error.localizedDescription)")
-			})
-		}
-	}
-	
-	func incrementallyLoadTweets() {
-		TwitterClient.sharedInstance?.userTimeline(id: user.id, since: tweets[0].id, success: { (tweets: [Tweet]) in
-			let currentSize = self.tweets.count
-			self.tweets = self.tweets + tweets
-			for tweet in self.tweets {
-				tweet.printTweet()
 			}
 			self.tweetsTable.reloadData()
+
+			// position the table at the next set of rows.
 			let indexPath = IndexPath(row: currentSize, section: 0)
 			self.tweetsTable.scrollToRow(at: indexPath, at: UITableViewScrollPosition.top, animated: true)
 		}, failure: { (error: NSError) in
@@ -161,7 +153,7 @@ extension ProfilesViewController : UIScrollViewDelegate {
 			isMoreDataLoading = true
 			
 			// Code to load more results
-			incrementallyLoadTweets()
+			loadTweets(since: tweets[0].id)
 		}
 	}
 }

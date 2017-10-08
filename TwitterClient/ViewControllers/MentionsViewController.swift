@@ -38,7 +38,7 @@ class MentionsViewController: UIViewController {
 		let user = User.currentUser!
 		self.navigationController?.navigationBar.topItem?.title = user.name! as String + "'s Mentions"
 
-		loadTweets()
+		loadTweets(since: nil)
 	}
 
     override func didReceiveMemoryWarning() {
@@ -48,31 +48,25 @@ class MentionsViewController: UIViewController {
     
 	@objc func refreshControlAction(_ refreshControl: UIRefreshControl) {
 		// ... Create the URLRequest `myRequest` ...
-		loadTweets()
+		loadTweets(since: nil)
 		// Tell the refreshControl to stop spinning
 		refreshControl.endRefreshing()
 	}
 	
-	func loadTweets() {
-		TwitterClient.sharedInstance?.mentionsTimeline(since: nil, success: { (tweets: [Tweet]) in
-			self.tweets = tweets
-			for tweet in self.tweets {
-				tweet.printTweet()
+	func loadTweets(since: UInt64?) {
+		TwitterClient.sharedInstance?.homeTimeline(since: since, success: { (tweets: [Tweet]) in
+			var currentSize: Int!
+			if since != nil {
+				currentSize = self.tweets.count
+				self.tweets = self.tweets + tweets
+			}
+			else {
+				currentSize = 0
+				self.tweets = tweets
 			}
 			self.tweetsTable.reloadData()
-		}, failure: { (error: NSError) in
-			print("error: \(error.localizedDescription)")
-		})
-	}
-	
-	func incrementallyLoadTweets() {
-		TwitterClient.sharedInstance?.mentionsTimeline(since: tweets[0].id, success: { (tweets: [Tweet]) in
-			let currentSize = self.tweets.count
-			self.tweets = self.tweets + tweets
-			for tweet in self.tweets {
-				tweet.printTweet()
-			}
-			self.tweetsTable.reloadData()
+			
+			// position the table at the next set of rows.
 			let indexPath = IndexPath(row: currentSize, section: 0)
 			self.tweetsTable.scrollToRow(at: indexPath, at: UITableViewScrollPosition.top, animated: true)
 		}, failure: { (error: NSError) in
@@ -126,7 +120,7 @@ extension MentionsViewController : UIScrollViewDelegate {
 			isMoreDataLoading = true
 			
 			// Code to load more results
-			incrementallyLoadTweets()
+			loadTweets(since: tweets[0].id)
 		}
 	}
 }
