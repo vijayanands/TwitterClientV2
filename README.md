@@ -45,7 +45,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://github.com/vijayanands/TwitterClientV2/blob/master/twitterClientDemo.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/vijayanands/TwitterClientV2/blob/master/demo.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
