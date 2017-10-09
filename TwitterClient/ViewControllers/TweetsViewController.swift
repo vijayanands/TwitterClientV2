@@ -33,8 +33,11 @@ class TweetsViewController: UIViewController {
 		
 		self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.28, green: 0.75, blue: 1.0, alpha: 1.0)
 		// set title in navigation bar
-		let user = User.currentUser!
-		self.navigationController?.navigationBar.topItem?.title = user.name! as String + "'s Home"
+		if let user = User.currentUser {
+			self.navigationController?.navigationBar.topItem?.title = user.name! as String + "'s Home"
+		} else {
+			self.navigationController?.navigationBar.topItem?.title = "Home"
+		}
 
         // Do any additional setup after loading the view.
 		loadTweets(since: nil)
